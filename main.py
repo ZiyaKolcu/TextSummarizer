@@ -8,6 +8,9 @@ from src.TextSummarizer.pipeline.stage_2_data_transformation_pipeline import (
 from src.TextSummarizer.pipeline.stage_3_model_trainer_pipeline import (
     ModelTrainerTrainingPipeline,
 )
+from src.TextSummarizer.pipeline.stage_4_model_evaluation_pipeline import (
+    ModelEvaluationTrainingPipeline,
+)
 
 
 STAGE_NAME = "Data Ingestion Stage"
@@ -26,8 +29,8 @@ STAGE_NAME = "Data Transformation Stage"
 
 try:
     logger.info(f"stage {STAGE_NAME} initiated")
-    data_ingestion_pipeline = DataTransformationTraningPipeline()
-    data_ingestion_pipeline.initiate_data_transformation()
+    data_transform_pipeline = DataTransformationTraningPipeline()
+    data_transform_pipeline.initiate_data_transformation()
     logger.info(f"Stage {STAGE_NAME} Completed")
 
 except Exception as e:
@@ -38,8 +41,20 @@ STAGE_NAME = "Model Trainer Stage"
 
 try:
     logger.info(f"stage {STAGE_NAME} initiated")
-    data_ingestion_pipeline = ModelTrainerTrainingPipeline()
-    data_ingestion_pipeline.initiate_model_trainer()
+    model_trainer_pipeline = ModelTrainerTrainingPipeline()
+    model_trainer_pipeline.initiate_model_trainer()
+    logger.info(f"Stage {STAGE_NAME} Completed")
+
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Model Evaluation Stage"
+
+try:
+    logger.info(f"stage {STAGE_NAME} initiated")
+    model_evaluation_pipeline = ModelEvaluationTrainingPipeline()
+    model_evaluation_pipeline.initiate_model_evaluation()
     logger.info(f"Stage {STAGE_NAME} Completed")
 
 except Exception as e:
